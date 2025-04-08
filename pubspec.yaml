@@ -31,12 +31,19 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: 
-  provider: 
+  provider: ^6.1.4 
   flutter_intl_phone_field:
   flutter_otp_text_field:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
+  cupertino_icons: 
+  google_fonts: 
+  intl: 
+  http: 
+  shared_preferences: 
+  get_time_ago: 
+  another_flushbar: 
+  japx: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +55,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

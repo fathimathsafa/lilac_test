@@ -10,8 +10,8 @@ class PhoneNumberScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final phoneProvider = Provider.of<PhoneNumberProvider>(context);
-    final TextEditingController controller =
+    final phoneProvider = Provider.of<AuthController>(context);
+    final TextEditingController phoneController =
         TextEditingController(text: phoneProvider.phoneNumber);
 
     return Scaffold(
@@ -52,24 +52,25 @@ class PhoneNumberScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30.h),
-   IntlPhoneField(
-  controller: controller,
-  initialCountryCode: 'IN',
-  decoration: InputDecoration(
-    contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
-    labelText: 'Phone Number',
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12.r),
-    ),
-  ),
-  style: TextStyle(fontSize: 16.sp),
-  onChanged: (value) {
-    phoneProvider.setPhoneNumber(value.completeNumber);
-  },
-),
-
-
-          
+            // IntlPhoneField(
+            //   controller: phoneController,
+            //   initialCountryCode: 'IN',
+            //   decoration: InputDecoration(
+            //     contentPadding:
+            //         EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+            //     labelText: 'Phone Number',
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(12.r),
+            //     ),
+            //   ),
+            //   style: TextStyle(fontSize: 16.sp),
+            //   onChanged: (value) {
+            //     phoneProvider.setPhoneNumber(value.completeNumber);
+            //   },
+            // ),
+            TextField(
+              controller: phoneController,
+            ),
             SizedBox(height: 10.h),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 4.w),
@@ -84,7 +85,7 @@ class PhoneNumberScreen extends StatelessWidget {
               height: 48.h,
               child: ElevatedButton(
                 onPressed: () {
-                  // Validate and go to OTP screen
+                  phoneProvider.onLogin(phoneController.text, context);
                   debugPrint('Phone Number: ${phoneProvider.phoneNumber}');
                 },
                 style: ElevatedButton.styleFrom(
