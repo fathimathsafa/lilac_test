@@ -55,6 +55,7 @@ class PhoneNumberScreen extends StatelessWidget {
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
+                  prefixIcon:Icon( Icons.phone_android_rounded),
                   hintStyle: GoogleFonts.urbanist(),
                   labelText: 'Phone Number',
                   hintText: 'Enter your phone number',
