@@ -62,7 +62,7 @@ class OtpController with ChangeNotifier {
 
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => UserProfileScreen()),
+        MaterialPageRoute(builder: (context) => MessagesScreen()),
         (route) => false,
       );
 

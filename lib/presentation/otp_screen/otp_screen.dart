@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:lilac_test/presentation/chat_screen/controller/chat_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lilac_test/core/constants/colors.dart';
+import 'package:lilac_test/core/constants/text_styles.dart';
 import 'package:lilac_test/presentation/otp_screen/controller/otp_screen_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -42,45 +44,42 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20.h),
-
             Text(
               "Enter your verification code",
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: GLTextStyles.headline2(context),
               textAlign: TextAlign.center,
             ),
-
             SizedBox(height: 10.h),
-
             Text(
-              "+91 ${widget.phoneNumber}",
-              style: TextStyle(fontSize: 14.sp, color: Colors.black54),
-              textAlign: TextAlign.center,
+              " ${widget.phoneNumber} Edit",
+              style:
+                  GoogleFonts.urbanist(fontSize: 10.sp, color: ColorTheme.grey),
+              textAlign: TextAlign.left,
             ),
-
             SizedBox(height: 30.h),
 
-            /// OTP Text Field
-            OtpTextField(
-              numberOfFields: 6,
-              borderColor: Colors.grey.shade400,
-              focusedBorderColor: const Color(0xFFFF4D67),
-              showFieldAsBox: true,
-              fieldWidth: 45.w,
-              borderRadius: BorderRadius.circular(10.r),
-              onCodeChanged: (String code) {
-                // Update state if needed
-              },
-              onSubmit: (String verificationCode) {
-                debugPrint("OTP entered: $verificationCode");
-                setState(() {
-                  _enteredOtp = verificationCode;
-                });
-              },
-            ),
+            /// OTP Text Field within LayoutBuilder for dynamic width calculation.
+            
+            
+
+                 OtpTextField(
+                  numberOfFields: 6,
+                  borderColor: ColorTheme.grey,
+                  focusedBorderColor: ColorTheme.pink,
+                  showFieldAsBox: true,
+                  borderRadius: BorderRadius.circular(10.r),
+                  onCodeChanged: (String code) {
+                    // Update state if needed
+                  },
+                  onSubmit: (String verificationCode) {
+                    debugPrint("OTP entered: $verificationCode");
+                    setState(() {
+                      _enteredOtp = verificationCode;
+                    });
+                  },
+                ),
+              
+            
 
             SizedBox(height: 24.h),
 
@@ -89,13 +88,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade600),
               textAlign: TextAlign.center,
             ),
-
             TextButton(
               onPressed: () {
                 // Handle OTP resend logic
               },
               child: Text(
-                "Resent",
+                "Resent", // Consider 'Resend' if appropriate.
                 style: TextStyle(
                   color: const Color(0xFFFF4D67),
                   fontWeight: FontWeight.w600,
@@ -103,7 +101,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
               ),
             ),
-
             const Spacer(),
 
             /// Verify Button
@@ -114,7 +111,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 onPressed: () {
                   if (_enteredOtp.length == 6) {
                     Provider.of<OtpController>(context, listen: false)
-                        .verifyOtp(_enteredOtp,widget.phoneNumber, context);
+                        .verifyOtp(_enteredOtp, widget.phoneNumber, context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Please enter a 6-digit OTP")),
@@ -133,7 +130,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
               ),
             ),
-
             SizedBox(height: 40.h),
           ],
         ),
@@ -141,4 +137,3 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 }
-
