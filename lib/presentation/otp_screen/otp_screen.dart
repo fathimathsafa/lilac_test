@@ -21,7 +21,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   @override
   void initState() {
     super.initState();
-    // Optionally set phone number to controller here
     Provider.of<OtpController>(context, listen: false)
         .setPhoneNumber("+91${widget.phoneNumber}");
   }
@@ -33,7 +32,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -44,63 +43,63 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20.h),
+
             Text(
               "Enter your verification code",
-              style: GLTextStyles.headline2(context),
+              style: GLTextStyles.headline2(context).copyWith(fontSize: 18.sp),
               textAlign: TextAlign.center,
             ),
+
             SizedBox(height: 10.h),
+
             Text(
-              " ${widget.phoneNumber} Edit",
-              style:
-                  GoogleFonts.urbanist(fontSize: 10.sp, color: ColorTheme.grey),
-              textAlign: TextAlign.left,
+              "+91 ${widget.phoneNumber} Edit",
+              style: GoogleFonts.urbanist(
+                fontSize: 10.sp,
+                color: ColorTheme.grey,
+              ),
             ),
+
             SizedBox(height: 30.h),
 
-            /// OTP Text Field within LayoutBuilder for dynamic width calculation.
-            
-            
-
-                 OtpTextField(
-                  numberOfFields: 6,
-                  borderColor: ColorTheme.grey,
-                  focusedBorderColor: ColorTheme.pink,
-                  showFieldAsBox: true,
-                  borderRadius: BorderRadius.circular(10.r),
-                  onCodeChanged: (String code) {
-                    // Update state if needed
-                  },
-                  onSubmit: (String verificationCode) {
-                    debugPrint("OTP entered: $verificationCode");
-                    setState(() {
-                      _enteredOtp = verificationCode;
-                    });
-                  },
-                ),
-              
-            
+            OtpTextField(
+              numberOfFields: 6,
+              borderColor: ColorTheme.grey,
+              focusedBorderColor: ColorTheme.pink,
+              showFieldAsBox: true,
+              fieldWidth: 35.w,
+              borderRadius: BorderRadius.circular(6.r),
+              onCodeChanged: (String code) {},
+              onSubmit: (String verificationCode) {
+                debugPrint("OTP entered: $verificationCode");
+                setState(() {
+                  _enteredOtp = verificationCode;
+                });
+              },
+            ),
 
             SizedBox(height: 24.h),
 
             Text(
               "Didn't get anything? No worries, let's try again.",
-              style: TextStyle(fontSize: 13.sp, color: Colors.grey.shade600),
+              style: GLTextStyles.screenText(context),
               textAlign: TextAlign.center,
             ),
+
             TextButton(
               onPressed: () {
                 // Handle OTP resend logic
               },
               child: Text(
-                "Resent", // Consider 'Resend' if appropriate.
-                style: TextStyle(
-                  color: const Color(0xFFFF4D67),
+                "Resend",
+                style: GoogleFonts.urbanist(
+                  color: ColorTheme.pink,
                   fontWeight: FontWeight.w600,
                   fontSize: 14.sp,
                 ),
               ),
             ),
+
             const Spacer(),
 
             /// Verify Button
@@ -114,7 +113,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         .verifyOtp(_enteredOtp, widget.phoneNumber, context);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Please enter a 6-digit OTP")),
+                      const SnackBar(
+                          content: Text("Please enter a 6-digit OTP")),
                     );
                   }
                 },
@@ -126,10 +126,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
                 child: Text(
                   "Verify",
-                  style: TextStyle(fontSize: 16.sp, color: Colors.white),
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
+
             SizedBox(height: 40.h),
           ],
         ),

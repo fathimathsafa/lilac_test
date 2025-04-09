@@ -2,12 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lilac_test/core/constants/text_styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../app_config/app_config.dart';
-import '../constants/colors.dart';
 
 class AppUtils {
   static Future<String?> getToken() async {
@@ -33,9 +31,7 @@ class AppUtils {
   }) {
     ScaffoldMessenger.of(context).clearSnackBars();
 
-    ///To CLEAR PREVIOUS SNACK BARS
     return ScaffoldMessenger.of(context)
-        // ScaffoldMessenger.of(context??Routes.router.routerDelegate.navigatorKey.currentState!.context)
         .showSnackBar(
       SnackBar(
         /*action:SnackBarAction(label: "Ok",
@@ -46,15 +42,8 @@ class AppUtils {
 
         behavior: showOnTop ? SnackBarBehavior.floating : null,
         backgroundColor: bgColor ?? Colors.white60,
-        content: Text(
-          message!,
-          style: textStyle ??
-              GLTextStyles.manropeStyle(
-                color: ColorTheme.white,
-                size: 12.sp,
-                weight: FontWeight.w500,
-              ),
-        ),
+        content:
+            Text(message!, style: textStyle ?? GLTextStyles.utilsText(context)),
         duration: Duration(seconds: time),
         margin: showOnTop
             ? EdgeInsets.only(

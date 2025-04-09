@@ -56,14 +56,18 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     itemCount: 6,
                     separatorBuilder: (_, __) => SizedBox(width: 12.w),
                     itemBuilder: (context, index) {
+                      final message = controller.messageList[index];
                       return Column(
                         children: [
                           CircleAvatar(
                             radius: 24.r,
                             backgroundColor: Colors.black,
+                            backgroundImage: NetworkImage(
+                            message.attributes?.profilePhotoUrl ?? "",
+                          ),
                           ),
                           Text(
-                            "User ${index + 1}",
+                            message.attributes?.name ?? "Unknown",
                             style: TextStyle(fontSize: 12.sp),
                           ),
                         ],
@@ -127,7 +131,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ChatScreen(),
+                              builder: (context) => ChatScreen(name: message.attributes?.name ?? "", active: message.attributes?.isOnline ?? false,image: message.attributes?.profilePhotoUrl ?? ""),
                             ),
                           );
                         },

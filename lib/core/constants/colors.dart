@@ -7,9 +7,5 @@ class ColorTheme {
   static Color green = const Color(0xFF00c254);
   static Color blue = Colors.blue;
   static Color pink = Colors.pinkAccent;
-  static Color yellow = const Color(0xfffaab54);
-  static Color desaiGreen = const Color(0xff3E9E7C);
   static Color grey = Colors.grey.shade600;
-  static Color lightgrey = const Color(0xffA0A0A0);
-  static Color logoutRed = const Color(0xffD92D20);
 }
