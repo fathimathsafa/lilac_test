@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lilac_test/core/constants/colors.dart';
 import 'package:lilac_test/core/constants/text_styles.dart';
 import 'package:lilac_test/presentation/otp_screen/controller/otp_screen_controller.dart';
+import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
@@ -27,6 +28,21 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final defaultPinTheme = PinTheme(
+      width: 50,
+      height: 60,
+      textStyle: const TextStyle(
+        fontSize: 20,
+        color: Colors.black,
+        fontWeight: FontWeight.w600,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey.shade400),
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,15 +59,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 20.h),
-
             Text(
               "Enter your verification code",
               style: GLTextStyles.headline2(context).copyWith(fontSize: 18.sp),
               textAlign: TextAlign.center,
             ),
-
             SizedBox(height: 10.h),
-
             Text(
               "+91 ${widget.phoneNumber} Edit",
               style: GoogleFonts.urbanist(
@@ -59,18 +72,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 color: ColorTheme.grey,
               ),
             ),
-
             SizedBox(height: 30.h),
-
-            OtpTextField(
-              numberOfFields: 6,
-              borderColor: ColorTheme.grey,
-              focusedBorderColor: ColorTheme.pink,
-              showFieldAsBox: true,
-              fieldWidth: 35.w,
-              borderRadius: BorderRadius.circular(6.r),
-              onCodeChanged: (String code) {},
-              onSubmit: (String verificationCode) {
+            Pinput(
+              length: 6,
+              //controller: _otpController,
+              defaultPinTheme: defaultPinTheme,
+              onCompleted: (String verificationCode) {
                 debugPrint("OTP entered: $verificationCode");
                 setState(() {
                   _enteredOtp = verificationCode;
@@ -78,18 +85,15 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               },
             ),
 
+            
             SizedBox(height: 24.h),
-
             Text(
               "Didn't get anything? No worries, let's try again.",
               style: GLTextStyles.screenText(context),
               textAlign: TextAlign.center,
             ),
-
             TextButton(
-              onPressed: () {
-               
-              },
+              onPressed: () {},
               child: Text(
                 "Resend",
                 style: GoogleFonts.urbanist(
@@ -99,9 +103,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
               ),
             ),
-
             const Spacer(),
-
             SizedBox(
               width: double.infinity,
               height: 48.h,
@@ -125,14 +127,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
                 child: Text(
                   "Verify",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    color: Colors.white,
-                  ),
+                  style: GLTextStyles.headline1(context),
                 ),
               ),
             ),
-
             SizedBox(height: 40.h),
           ],
         ),

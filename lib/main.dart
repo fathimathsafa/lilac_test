@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lilac_test/presentation/authentication_screen/controller/authentication_screen_controller.dart';
-import 'package:lilac_test/presentation/authentication_screen/view/authentication_screen.dart';
+import 'package:lilac_test/presentation/authentication_screen/view/phone_number_screen.dart';
 import 'package:lilac_test/presentation/chat_screen/controller/chat_controller.dart';
 import 'package:lilac_test/presentation/message_list_screen/controller/message_list_screen_controller.dart';
 import 'package:lilac_test/presentation/message_list_screen/view/message_list_screen.dart';

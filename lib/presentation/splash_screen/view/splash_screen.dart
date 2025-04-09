@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lilac_test/core/constants/colors.dart';
 import 'package:lilac_test/core/constants/text_styles.dart';
-import 'package:lilac_test/presentation/authentication_screen/view/authentication_screen.dart';
+import 'package:lilac_test/presentation/authentication_screen/view/phone_number_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -42,9 +43,11 @@ class SplashScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 400.h),
                     SignInButton(
-                      leadingWidget: Image.asset(
-                        'assets/googlelogo.png',
-                        height: 15.sp,
+                      leadingWidget: Flexible(
+                        child: Image.asset(
+                          'assets/googlelogo.png',
+                          height: 15.sp,
+                        ),
                       ),
                       text: 'Sign in with Google',
                       color: ColorTheme.white,
@@ -55,9 +58,11 @@ class SplashScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 12.h),
                     SignInButton(
-                      leadingWidget: Icon(
-                        Icons.facebook,
-                        color: ColorTheme.white,
+                      leadingWidget: Flexible(
+                        child: Icon(
+                          Icons.facebook,
+                          color: ColorTheme.white,
+                        ),
                       ),
                       text: 'Sign in with Facebook',
                       color: ColorTheme.blue,
@@ -68,9 +73,11 @@ class SplashScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 12.h),
                     SignInButton(
-                      leadingWidget: Icon(
-                        Icons.phone,
-                        color: Colors.white,
+                      leadingWidget: Flexible(
+                        child: Icon(
+                          Icons.phone,
+                          color: Colors.white,
+                        ),
                       ),
                       text: 'Sign in with phone number',
                       color: ColorTheme.pink,
@@ -141,12 +148,10 @@ class SignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      icon: Flexible(child: leadingWidget),
-      label: Flexible(
-        child: Text(
-          text,
-          style: TextStyle(fontSize: fontSize, color: textColor),
-        ),
+      icon: leadingWidget,
+      label: Text(
+        text,
+        style: GoogleFonts.urbanist(fontSize: fontSize, color: textColor),
       ),
       style: ElevatedButton.styleFrom(
         backgroundColor: color,

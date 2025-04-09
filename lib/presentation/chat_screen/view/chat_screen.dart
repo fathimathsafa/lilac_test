@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lilac_test/core/constants/colors.dart';
+import 'package:lilac_test/core/constants/text_styles.dart';
 import 'package:lilac_test/presentation/chat_screen/controller/chat_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:lilac_test/repository/chat_screen/model/chat_screen_model.dart';
@@ -23,8 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
-
-  final int currentUserId = 55; 
+  final int currentUserId = 55;
 
   @override
   void initState() {
@@ -78,8 +80,7 @@ class _ChatScreenState extends State<ChatScreen> {
             title: Row(
               children: [
                 IconButton(
-                  icon:
-                      const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+                  icon: Icon(Icons.arrow_back_ios_new, color: ColorTheme.black),
                   onPressed: () => Navigator.pop(context),
                 ),
                 CircleAvatar(
@@ -94,25 +95,25 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: [
                     Text(
                       widget.name,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
-                      ),
+                      style: GLTextStyles.headline2(context),
                     ),
                     Row(
                       children: [
                         Text(
                           widget.active ? "Online" : "Offline",
-                          style: TextStyle(
-                            color: widget.active ? Colors.green : Colors.grey,
+                          style: GoogleFonts.urbanist(
+                            color: widget.active
+                                ? ColorTheme.green
+                                : ColorTheme.grey,
                             fontSize: 12.sp,
                           ),
                         ),
                         SizedBox(width: 4.w),
                         Icon(Icons.circle,
                             size: 6,
-                            color: widget.active ? Colors.green : Colors.grey),
+                            color: widget.active
+                                ? ColorTheme.green
+                                : ColorTheme.grey),
                       ],
                     )
                   ],
@@ -133,11 +134,11 @@ class _ChatScreenState extends State<ChatScreen> {
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(16.r),
                   ),
-                  child: Text("Today", style: TextStyle(fontSize: 12.sp)),
+                  child: Text("Today",
+                      style: GoogleFonts.urbanist(fontSize: 12.sp)),
                 ),
               ),
             ),
-
             Expanded(
               child: controller.isLoading
                   ? const Center(child: CircularProgressIndicator())
@@ -156,7 +157,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           },
                         ),
             ),
-
             Padding(
               padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
               child: Container(
@@ -170,7 +170,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     Expanded(
                       child: TextField(
                         controller: _controller,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                          hintStyle:
+                              GoogleFonts.urbanist(color: ColorTheme.black),
                           hintText: "Type a message...",
                           border: InputBorder.none,
                         ),
@@ -179,7 +181,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     IconButton(
                       onPressed: _sendMessage,
-                      icon: const Icon(Icons.send, color: Colors.pink),
+                      icon: Icon(Icons.send, color: ColorTheme.pink),
                     )
                   ],
                 ),
@@ -217,8 +219,7 @@ class _ChatScreenState extends State<ChatScreen> {
               constraints: BoxConstraints(maxWidth: 250.w),
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
               decoration: BoxDecoration(
-                color:
-                    isSentByMe ? const Color(0xFFFF4D67) : Colors.grey.shade200,
+                color: isSentByMe ? ColorTheme.pink : Colors.grey.shade200,
                 borderRadius: isSentByMe
                     ? BorderRadius.only(
                         topLeft: Radius.circular(12.r),
@@ -233,7 +234,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
               child: Text(
                 messageText,
-                style: TextStyle(
+                style: GoogleFonts.urbanist(
                   color: isSentByMe ? Colors.white : Colors.black,
                   fontSize: 14.sp,
                 ),
@@ -246,7 +247,8 @@ class _ChatScreenState extends State<ChatScreen> {
               children: [
                 Text(
                   formattedTime,
-                  style: TextStyle(fontSize: 11.sp, color: Colors.grey),
+                  style:
+                      GoogleFonts.urbanist(fontSize: 11.sp, color: Colors.grey),
                 ),
                 SizedBox(width: 3),
                 Icon(isSentByMe ? Icons.done_all : null,

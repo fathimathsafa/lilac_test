@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:lilac_test/core/constants/colors.dart';
+import 'package:lilac_test/core/constants/text_styles.dart';
 import 'package:lilac_test/presentation/chat_screen/view/chat_screen.dart';
 import 'package:lilac_test/presentation/message_list_screen/controller/message_list_screen_controller.dart';
 import 'package:provider/provider.dart';
@@ -26,15 +30,15 @@ class _MessagesScreenState extends State<MessagesScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new, color: ColorTheme.black),
+          onPressed: () => Navigator.pop(context),
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
         title: Text(
           'Messages',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
+          style: GLTextStyles.headline2(context),
         ),
         centerTitle: false,
       ),
@@ -50,7 +54,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 80.h,
+                  height: 90.h,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: 6,
@@ -59,25 +63,28 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       final message = controller.messageList[index];
                       return Column(
                         children: [
-                          CircleAvatar(
-                            radius: 24.r,
-                            backgroundColor: Colors.black,
-                            backgroundImage: NetworkImage(
-                            message.attributes?.profilePhotoUrl ?? "",
+                          Flexible(
+                            child: CircleAvatar(
+                              radius: 24.r,
+                              backgroundColor: Colors.black,
+                              backgroundImage: NetworkImage(
+                                message.attributes?.profilePhotoUrl ?? "",
+                              ),
+                            ),
                           ),
-                          ),
-                          Text(
-                            message.attributes?.name ?? "Unknown",
-                            style: TextStyle(fontSize: 12.sp),
+                          Flexible(
+                            child: Text(
+                              message.attributes?.name ?? "Unknown",
+                              style: GoogleFonts.urbanist(
+                                  fontSize: 12.sp, color: ColorTheme.black),
+                            ),
                           ),
                         ],
                       );
                     },
                   ),
                 ),
-
                 SizedBox(height: 20.h),
-
                 Container(
                   height: 45.h,
                   decoration: BoxDecoration(
@@ -89,9 +96,11 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       SizedBox(width: 12.w),
                       const Icon(Icons.search, color: Colors.grey),
                       SizedBox(width: 8.w),
-                      const Expanded(
+                      Expanded(
                         child: TextField(
                           decoration: InputDecoration(
+                            hintStyle:
+                                GoogleFonts.urbanist(color: ColorTheme.black),
                             hintText: "Search",
                             border: InputBorder.none,
                           ),
@@ -100,9 +109,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
                     ],
                   ),
                 ),
-
                 SizedBox(height: 20.h),
-
                 Expanded(
                   child: ListView.builder(
                     itemCount: controller.messageList.length,
@@ -120,17 +127,32 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         ),
                         title: Text(
                           message.attributes?.name ?? "Unknown",
-                          style: TextStyle(
+                          style: GoogleFonts.urbanist(
                             color: Colors.black,
                             fontWeight: FontWeight.w600,
                             fontSize: 15.sp,
+                          ),
+                        ),
+                        trailing: Text(
+                          message.attributes?.messageReceivedFromPartnerAt !=
+                                  null
+                              ? DateFormat.jm().format(message
+                                  .attributes!.messageReceivedFromPartnerAt!)
+                              : "",
+                          style: GoogleFonts.urbanist(
+                            color: Colors.grey,
+                            fontSize: 13.sp,
                           ),
                         ),
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ChatScreen(name: message.attributes?.name ?? "", active: message.attributes?.isOnline ?? false,image: message.attributes?.profilePhotoUrl ?? ""),
+                              builder: (context) => ChatScreen(
+                                  name: message.attributes?.name ?? "",
+                                  active: message.attributes?.isOnline ?? false,
+                                  image: message.attributes?.profilePhotoUrl ??
+                                      ""),
                             ),
                           );
                         },
