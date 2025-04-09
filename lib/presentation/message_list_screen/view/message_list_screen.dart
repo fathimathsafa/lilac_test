@@ -78,7 +78,6 @@ class _MessagesScreenState extends State<MessagesScreen> {
 
                 SizedBox(height: 20.h),
 
-                // Search bar
                 Container(
                   height: 45.h,
                   decoration: BoxDecoration(

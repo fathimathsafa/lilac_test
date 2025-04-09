@@ -21,8 +21,7 @@ class ChatController with ChangeNotifier {
       final response = await ChatService.getChats();
 
       if (response != null) {
-        // Assuming response is already a List<MessageModel>
-        // If not, you'll need to properly parse it
+        
         chatList = response;
       } else {
         AppUtils.oneTimeSnackBar(

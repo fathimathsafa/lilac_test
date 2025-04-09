@@ -88,7 +88,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
             TextButton(
               onPressed: () {
-                // Handle OTP resend logic
+               
               },
               child: Text(
                 "Resend",
@@ -102,7 +102,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
             const Spacer(),
 
-            /// Verify Button
             SizedBox(
               width: double.infinity,
               height: 48.h,

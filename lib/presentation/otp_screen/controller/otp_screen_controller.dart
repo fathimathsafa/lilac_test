@@ -55,10 +55,7 @@ class OtpController with ChangeNotifier {
     final response = await OtpService.verifyOtp(data);
 
     if (response != null && response['data'] != null) {
-      //  storeLoginData(response);
-      // storeUserToken(
-      //     response["data"]["attributes"]["auth_status"]["access_token"]);
-      // log("token -> ${response["data"]["attributes"]["auth_status"]["access_token"]}");
+    
 
       Navigator.pushAndRemoveUntil(
         context,
